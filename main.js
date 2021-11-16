@@ -28,12 +28,10 @@ class polynomial{
     }
   }
   function multiplyPoly(p1,p2){
-    let r = [0.0];
-    r.length = p1.length + p2.length;
+    let r = new Array(p1.length + p2.length - 1).fill(0);
     for(i = 0; i < p1.length;i++){
         for(j = 0; j < p2.length; j++){
             r[i+j] += p1[i] * p2[j];
-            console.log((i+j) + "  " + p1[i] + "  " + p2[j])
         }
     }
     return r;
