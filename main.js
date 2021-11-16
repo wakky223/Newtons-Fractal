@@ -28,6 +28,7 @@
     }
   }*/
 
+
 //multiplies two polynoials, inputs are arrays starting at the x^0 term. 
 function multiplyPoly(p1,p2){
     let r = new Array(p1.length + p2.length - 1).fill(0);
@@ -81,6 +82,7 @@ function createPolynomial(zeros,czerosRP,czerosIP) {
     console.log(r[0] + ' + ' + r[1] + 'x + ' + r[2] + 'x^2 + ' + r[3] + 'x^3 + ' + r[4] + 'x^4 + ' + r[5] + 'x^5 + ' + r[6] + 'x^6 + ' + r[7] + 'x^7 + ')
     return r;
 }
+
 
 
 c = document.getElementById("canvas");
