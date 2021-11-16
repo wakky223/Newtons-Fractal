@@ -29,3 +29,10 @@ class polynomial{
       return k;
     }
   }
+function multiplyPoly(p1,p2){
+    for(i = 0; i < p1.length;i++){
+        for(j = 0; j < p2.length; j++){
+            
+        }
+    }
+}
