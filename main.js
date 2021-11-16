@@ -1,11 +1,10 @@
 class polynomial{
     constructor(zerosRe,zerosIm) {
-        if(zerosX.length != zerosY.length){
+        if(zerosRe.length != zerosIm.length){
             throw 'Coordinate Pair Exception.';
             break;
         }
-
-        for(let i = 0; i < zerosX.length; i++){
+        for(let i = 0; i < zerosRe.length; i++){
 
 
         }
@@ -30,9 +29,11 @@ class polynomial{
     }
   }
 function multiplyPoly(p1,p2){
+    let r = [0.0];
     for(i = 0; i < p1.length;i++){
         for(j = 0; j < p2.length; j++){
-            
+            r[i+j] = p1[i] * p2[j];
         }
     }
+    return r;
 }
