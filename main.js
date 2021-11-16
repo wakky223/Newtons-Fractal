@@ -27,12 +27,19 @@ class polynomial{
       return k;
     }
   }
-function multiplyPoly(p1,p2){
+  function multiplyPoly(p1,p2){
     let r = [0.0];
+    r.length = p1.length + p2.length;
     for(i = 0; i < p1.length;i++){
         for(j = 0; j < p2.length; j++){
             r[i+j] += p1[i] * p2[j];
+            console.log((i+j) + "  " + p1[i] + "  " + p2[j])
         }
     }
     return r;
 }
+
+
+c = document.getElementById("canvas");
+ctx = c.getContext("2d");
+
