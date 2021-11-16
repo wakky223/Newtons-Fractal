@@ -2,7 +2,6 @@ class polynomial{
     constructor(zerosRe,zerosIm) {
         if(zerosRe.length != zerosIm.length){
             throw 'Coordinate Pair Exception.';
-            break;
         }
         for(let i = 0; i < zerosRe.length; i++){
 
