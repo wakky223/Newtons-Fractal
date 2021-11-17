@@ -71,7 +71,13 @@ function eval(p, input) {
     return r;
 }
 
+//sets a pixel to a color
+function setPixel(color,posx,posy){
+    ctx.fillStyle = color;
+    ctx.fillRect(posx, posy, 1, 1);
+}
 
-c = document.getElementById("canvas");
+
+var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 
