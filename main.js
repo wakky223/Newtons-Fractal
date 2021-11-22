@@ -86,5 +86,9 @@ function setPixel(color,posx,posy){
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 
-p = createPolynomial([1,2,3,4,5],[4,9],[13,5])
-document.write(p[0] + ' + ' + p[1] + 'x + ' + p[2] + 'x^2 + ' + p[3] + 'x^3 + ' + p[4] + 'x^4 + ' + p[5] + 'x^5 + ' + p[6] + 'x^6 + ' + p[7] + 'x^7 + ')
+p = createPolynomial([1,2,3,4,5],[4,9],[13,5]);
+let str = "";
+for(let i = p.length; i > 0; i--){
+    str += p[i] + "x^" + i + " + ";
+}
+document.write(str);
