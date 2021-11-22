@@ -71,7 +71,7 @@ function derivitive(p){
 function eval(p, input) {
     let r = math.complex(p[0],0);
         for (let i = 1; i < p.length; i++) {
-            r += math.add(r,math.multiply(p[i] , math.pow(input,i)));
+            r = math.add(r,math.multiply(p[i] , math.pow(input,i)));
         }
     return r;
 }
