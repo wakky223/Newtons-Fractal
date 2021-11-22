@@ -71,7 +71,7 @@ function derivitive(p){
 function eval(p, input) {
     let r = math.complex(p[0],0);
         for (let i = 1; i < p.length; i++) {
-            r = math.add(r,math.multiply(p[i] , math.pow(input,i)));
+            r += math.add(r,math.multiply(p[i] , math.pow(input,i)));
         }
     return r;
 }
@@ -84,9 +84,11 @@ function setPixel(color,posx,posy){
 
 function polyToString(p){
     let str = "";
-    for(let i = p.length-1; i > -1; i--){
+    for(let i = p.length-1; i > 0; i--){
         str += p[i] + "x^" + i + " + ";
     }
+    str += p[0];
+    return str;
 }
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
