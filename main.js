@@ -82,13 +82,13 @@ function setPixel(color,posx,posy){
     ctx.fillRect(posx, posy, 1, 1);
 }
 
-
+function polyToString(p){
+    let str = "";
+    for(let i = p.length-1; i > -1; i--){
+        str += p[i] + "x^" + i + " + ";
+    }
+}
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 
-p = createPolynomial([1,2,3,4,5],[4,9],[13,5]);
-let str = "";
-for(let i = p.length; i > 0; i--){
-    str += p[i] + "x^" + i + " + ";
-}
-document.write(str);
+document.write(polyToString(createPolynomial([0,1,2,3,4,5],[1,2,14],[4,3,55])));
