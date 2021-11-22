@@ -11,11 +11,16 @@ function multiplyPoly(p1,p2){
 
 //calculates the polynomial that has given complex conjugate zeros
 function imaginaryPolynomialZeros(realPart, imaginaryPart) {
-    let r = [0, 0, 1];
-    r[0] = (realPart * realPart) + (imaginaryPart * imaginaryPart);
-    r[1] = -2 * realPart;
-    console.log("x^2 + " + r[1] + "x + " + r[0]);
-    return r;
+    if(imaginaryPart != 0){
+        let r = [0, 0, 1];
+        r[0] = (realPart * realPart) + (imaginaryPart * imaginaryPart);
+        r[1] = -2 * realPart;
+        console.log("x^2 + " + r[1] + "x + " + r[0]);
+        return r;
+    }else{
+        return [-realPart,1];
+    }
+
 }
 
 //creates a polynomial based on real and imaginary zeros; assumes each complex zero has a conjugate
@@ -81,3 +86,5 @@ function setPixel(color,posx,posy){
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 
+p = createPolynomial([1,2,3,4,5],[4,9],[13,5])
+document.write(p[0] + ' + ' + p[1] + 'x + ' + p[2] + 'x^2 + ' + p[3] + 'x^3 + ' + p[4] + 'x^4 + ' + p[5] + 'x^5 + ' + p[6] + 'x^6 + ' + p[7] + 'x^7 + ')
