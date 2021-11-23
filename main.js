@@ -85,9 +85,10 @@ function setPixel(color,posx,posy){
 
 function polyToString(p){
     let str = "";
-    for(let i = p.length-1; i > -1; i--){
+    for(let i = p.length-1; i > 0; i--){
         str += p[i] + "x^" + i + " + ";
     }
+    str += p[0];
     return str;
 }
 var c = document.getElementById("canvas");
