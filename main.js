@@ -94,8 +94,7 @@ function polyToString(p){
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 
-document.write(polyToString(createPolynomial([0,1,2,3,4,5],[1,2,14],[4,3,55])));
-poly = createPolynomial([0,1,2],[1],[4]);
 
+poly = createPolynomial([0,1,2],[1],[4]);
 
 document.write(eval(poly,window.prompt("eval value")));
