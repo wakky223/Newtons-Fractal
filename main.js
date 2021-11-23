@@ -42,10 +42,11 @@ function createPolynomial(zeros,czerosRP,czerosIP) {
             r = multiplyPoly(r, imaginaryPolynomialZeros(czerosRP[i], czerosIP[i]));
         }
         console.log(r);
-    } else if (czerosRp.length > 0) {
-        r[0] = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0])[0];
-        r[1] = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0])[1];
-        r[2] = 1;
+    } else if (czerosRP.length > 0) {
+        a = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0]);
+        r[0] = a[0];
+        r[1] = a[1];
+        r[2] = a[2];
         for (let i = 0; i < zeros.length; i++) {
             r = multiplyPoly(r, [-zeros[i], 1]);
         }
@@ -84,10 +85,9 @@ function setPixel(color,posx,posy){
 
 function polyToString(p){
     let str = "";
-    for(let i = p.length-1; i > 0; i--){
+    for(let i = p.length-1; i > -1; i--){
         str += p[i] + "x^" + i + " + ";
     }
-    str += p[0];
     return str;
 }
 var c = document.getElementById("canvas");
