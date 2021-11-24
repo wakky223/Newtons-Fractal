@@ -77,10 +77,46 @@ function eval(p, input) {
     return r;
 }
 
-//sets a pixel to a color
-function setPixel(color,posx,posy){
-    ctx.fillStyle = color;
-    ctx.fillRect(posx, posy, 1, 1);
+function iterate (v,p,d){
+    let r = eval(p,v).neg();
+    r = math.divide(r,eval(d,v));
+    r = math.add(r,v);
+    return r; 
+}
+
+//sets the screen
+function setScreen(iterations,p,rZero,iZero){
+    var c = document.getElementById("canvas");
+    ctx = c.getContext("2d");
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    var id = ctx.createImageData(c.width,c.height);
+    d = derivitive(p);
+
+    var pixels = id.data;
+    for(let py = 0; py < c.height; py++){
+        for(let px = 0; px < c.width; px++){
+            k = math.complex(px,py);
+            for(let i = 0;i < iterations;i++ ){
+                k = iterate(k,p,d);
+            }
+            console.log(k);
+            if(k > 0){
+                var r = 255;
+            }else{
+                var r = 0;
+            }
+            
+            var g = 100;
+            var b = 100;
+            var offset = (py * id.width + px) * 4;
+            pixels[offset] = r;
+            pixels[offset + 1] = g;
+            pixels[offset + 2] = b;
+            pixels[offset + 3] = 255;
+        }
+    }
+    ctx.putImageData(id, 0, 0);
 }
 
 function polyToString(p){
@@ -91,10 +127,10 @@ function polyToString(p){
     str += p[0];
     return str;
 }
-var c = document.getElementById("canvas");
-ctx = c.getContext("2d");
 
+polynomial = createPolynomial([1,2,3],[],[]);
+console.time('doSomething');
+setScreen(1,polynomial,0,0);
+console.timeEnd('doSomething');
+console.log('done');
 
-poly = createPolynomial([0,1,2],[1],[4]);
-
-document.write(eval(poly,window.prompt("eval value")));
