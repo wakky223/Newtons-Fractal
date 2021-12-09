@@ -163,6 +163,9 @@ ctx = c.getContext("2d");
 c.width = window.innerWidth;
 c.height = window.innerHeight;
 
-var scale = 1/5;
+var scale = 0.005;
 var h = c.width/2;
 var k = c.height/2;
+
+
+setScreen(20,[1,-0.5],[0,0.8660254037844386467637232]);
