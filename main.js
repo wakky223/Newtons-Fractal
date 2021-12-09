@@ -43,10 +43,7 @@ function createPolynomial(zeros,czerosRP,czerosIP) {
         }
         console.log(r);
     } else if (czerosRP.length > 0) {
-        a = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0]);
-        r[0] = a[0];
-        r[1] = a[1];
-        r[2] = a[2];
+        r = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0]);
         for (let i = 0; i < zeros.length; i++) {
             r = multiplyPoly(r, [-zeros[i], 1]);
         }
@@ -54,7 +51,7 @@ function createPolynomial(zeros,czerosRP,czerosIP) {
             r = multiplyPoly(r, imaginaryPolynomialZeros(czerosRP[i], czerosIP[i]));
         }
     }
-    console.log(r[0] + ' + ' + r[1] + 'x + ' + r[2] + 'x^2 + ' + r[3] + 'x^3 + ' + r[4] + 'x^4 + ' + r[5] + 'x^5 + ' + r[6] + 'x^6 + ' + r[7] + 'x^7 + ');
+    polyToString(r);
     return r;
 }
 
@@ -64,7 +61,7 @@ function derivitive(p){
     for (let i = 0; i < p.length-1; i++) {
         r[i] = p[i+1]*(i+1);
     }
-    console.log(r[0] + ' + ' + r[1] + 'x + ' + r[2] + 'x^2 + ' + r[3] + 'x^3 + ' + r[4] + 'x^4 + ' + r[5] + 'x^5 + ' + r[6] + 'x^6 + ' + r[7] + 'x^7 + ');
+    polyToString(r);
     return r;
 }
 
@@ -77,6 +74,7 @@ function eval(p, input) {
     return r;
 }
 
+//does one iteration of newtons method
 function iterate (v,p,d){
     let r = eval(p,v).neg();
     r = math.divide(r,eval(d,v));
@@ -84,32 +82,50 @@ function iterate (v,p,d){
     return r; 
 }
 
+//iterates newtons method
+function newtonsMethod (v,p,iterations){
+    d = derivitive(p);
+    for(let i = 0;i < iterations;i++ ){
+        v = iterate(v,p,d);
+    }
+    return v;
+}
+
+function newtonsMethod (v,p,iterations,d){
+    for(let i = 0;i < iterations;i++ ){
+        v = iterate(v,p,d);
+    }
+    return v;
+}
+
+function nearRoot(v,rZero,iZero){
+    let distance = new Array(rZero.length).fill(0); 
+    for(let i = 0; i < rZero.length; i++){
+        distance[i] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (iZero[i]-v.im) * (iZero[i]-v.im));
+    }
+    for(let i = 0; i < rZero.length; i++){
+        distance[i + rZero.length] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (-iZero[i]-v.im) * (-iZero[i]-v.im));
+    }
+    const min = math.min(distance);
+    return distance.indexOf(min);
+}
+
 //sets the screen
-function setScreen(iterations,p,rZero,iZero){
-    var c = document.getElementById("canvas");
-    ctx = c.getContext("2d");
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+function setScreen(iterations,rZero,iZero){
+    console.time('drawFractal');
+    p = createPolynomial([],rZero,iZero);
     var id = ctx.createImageData(c.width,c.height);
     d = derivitive(p);
-
     var pixels = id.data;
-    for(let py = 0; py < c.height; py++){
-        for(let px = 0; px < c.width; px++){
-            k = math.complex(px,py);
-            for(let i = 0;i < iterations;i++ ){
-                k = iterate(k,p,d);
-            }
-            console.log(k);
-            if(k > 0){
-                var r = 255;
-            }else{
-                var r = 0;
-            }
-            
-            var g = 100;
+    for(let x = 0; x < c.width; x++){
+        for(let y = 0; y < c.height; y++){
+            iterant = math.complex(scale * (x - h), -scale * (y - k));
+            iterant = newtonsMethod (iterant,p,iterations,d);
+            //find closest root
+            var g =  nearRoot(iterant,rZero,iZero) * 63.75;
+            var r = 100;
             var b = 100;
-            var offset = (py * id.width + px) * 4;
+            var offset = (y * id.width + x) * 4;
             pixels[offset] = r;
             pixels[offset + 1] = g;
             pixels[offset + 2] = b;
@@ -117,20 +133,36 @@ function setScreen(iterations,p,rZero,iZero){
         }
     }
     ctx.putImageData(id, 0, 0);
+    console.timeEnd('drawFractal');
 }
 
+//for dev purposes, converts a polynomial to a string to compare in other software
 function polyToString(p){
     let str = "";
     for(let i = p.length-1; i > 0; i--){
         str += p[i] + "x^" + i + " + ";
     }
     str += p[0];
+    console.log(str);
     return str;
 }
 
-polynomial = createPolynomial([1,2,3],[],[]);
-console.time('doSomething');
-setScreen(1,polynomial,0,0);
-console.timeEnd('doSomething');
+//listen for enter keypress
+window.onkeypress = function(event) {
+    if (event.keyCode == 49) {
+        console.time('doSomething');
+        setScreen(1,[0,50,100],[0,200,500]);
+        console.timeEnd('doSomething');
+    }
+}   
+
 console.log('done');
 
+var c = document.getElementById("canvas");
+ctx = c.getContext("2d");
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+
+var scale = 1/5;
+var h = c.width/2;
+var k = c.height/2;
