@@ -69,8 +69,11 @@ function derivitive(p){
 //evaluates a polynomial at a given input
 function eval(p, input) {
     let r = math.complex(p[0],0);
-        for (let i = 1; i < p.length; i++) {
-            r = math.add(r,math.multiply(p[i] , math.pow(input,i)));
+    let x = input;
+    r = math.add(r,math.multiply(p[1] , input));
+        for (let i = 2; i < p.length; i++) {
+            x = math.multiply(x,input)
+            r = math.add(r,math.multiply(p[i] , x));
         }
     return r;
 }
