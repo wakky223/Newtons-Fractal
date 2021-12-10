@@ -1,0 +1,18 @@
+body {
+    overflow: hidden;  
+    padding: 0px;
+    margin: 0px;
+}
+
+canvas {
+    border:0px; 
+    padding: 0px;
+    position: fixed; 
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+div {
+    padding:5px;
+}
