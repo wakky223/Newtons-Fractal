@@ -235,11 +235,11 @@ window.onkeypress = function(event) {
     }else if(event.keyCode == 52){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
+        setScreen([math.random()*10,math.random()*10],[0,math.random()*10]);
     }else if(event.keyCode == 53){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
+        setScreen([math.random()*10,math.random()*10],[math.random()*10,math.random()*10]);
     }
 }   
 
