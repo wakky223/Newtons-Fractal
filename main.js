@@ -147,17 +147,17 @@ function setScreen(rZero,iZero){
                 for(let i = 0; i < rZero.length; i++){
                     distance[i + rZero.length] = math.sqrt( ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (-iZero[i]-iterant.im) * (-iZero[i]-iterant.im));
                 } 
-                if(math.min(distance) < 0.001){
+                if(math.min(distance) < 0.00001){
                     var shading = i;
                     i = iterations;
                 }
             }
             //set the color for the pixel
             const closestRoot = math.min(distance);
-            if(shading != iterations/2-1 ){
+            if(closestRoot < 0.00001 ){
                 var g =  distance.indexOf(closestRoot) * 63.75;
-                var r = 80 + shading * 10;
-                var b = 80 + shading * 10;
+                var r = 80 + shading * shadingCoeficient;
+                var b = 80 + shading * shadingCoeficient;
             }else{
                 var r = 0;
                 var g = 0;
@@ -257,3 +257,4 @@ var scale = 0.005;
 var h = c.width/2;
 var k = c.height/2;
 var maxiterations = 200;
+var shadingCoeficient = 10;
