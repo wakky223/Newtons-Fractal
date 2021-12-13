@@ -171,7 +171,7 @@ function setScreen(rZero,iZero){
             pixels[offset + 3] = 255;
         }
         elem.style.width = ((x/c.width) * 100 ) + "%";
-        time.sleep(0);
+        time.sleep(0.0001);
     }
     ctx.putImageData(id, 0, 0);
     console.timeEnd('drawFractal');
