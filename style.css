@@ -20,4 +20,5 @@ canvas {
 #bar {
     width: 100%;
     height: 7px;
+    padding: 0px;
 }
