@@ -170,7 +170,8 @@ function setScreen(rZero,iZero){
             pixels[offset + 2] = b;
             pixels[offset + 3] = 255;
         }
-        console.log(((x/c.width) * 100 ));
+        elem.style.width = ((x/c.width) * 100 ) + "%";
+        time.sleep(0);
     }
     ctx.putImageData(id, 0, 0);
     console.timeEnd('drawFractal');
@@ -251,7 +252,9 @@ console.log('done');
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 c.width = window.innerWidth;
-c.height = window.innerHeight;
+c.height = window.innerHeight-7;
+
+var elem = document.getElementById("bar");
 
 var scale = 0.005;
 var h = c.width/2;
