@@ -170,7 +170,7 @@ function setScreen(rZero,iZero){
             pixels[offset + 2] = b;
             pixels[offset + 3] = 255;
         }
-        elem.style.width = ((x/c.width) * 100 ) + "%";
+        elem.style.width = x + "px";
         time.sleep(0.0001);
     }
     ctx.putImageData(id, 0, 0);
