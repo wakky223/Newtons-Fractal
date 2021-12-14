@@ -77,22 +77,26 @@ window.onkeypress = function(event) {
 //create the web worker
 const w = new Worker("worker.js");
 
-//setup worker message 
+//setup worker onmessage function 
 w.onmessage = function(e) {
     if(typeof e.data == "number"){
     document.getElementById("innerBar").style.width = e.data + 1 +  "px";
     }else if(typeof e.data == "object"){
         ctx.putImageData(e.data, 0, 0);
+    }else if(typeof e.data == "string"){
+        document.getElementById("innerBar").innerHTML = e.data;
     }
 }
 
+//setup canvas element
 var c = document.getElementById("canvas");
 c.width = window.innerWidth;
 c.height = window.innerHeight-7;
+ctx = c.getContext("2d");
+var id = ctx.createImageData(c.width,c.height);
+
+//initialize scale & progress bar 
 var scale = 0.005;
 var elem = document.getElementById("innerBar");
 
-
-ctx = c.getContext("2d");
-var id = ctx.createImageData(c.width,c.height);
-console.log('done');
+console.log('Ready.');

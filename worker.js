@@ -107,7 +107,7 @@ function setScreen(rZero,iZero,e){
     k = e.data.height/2;
     console.time('drawFractal');
     p = createPolynomial([],rZero,iZero);
-    polyToString(p);
+    postMessage("Drawing: " + polyToString(p));
     var d = derivitive(p);
     iterations = e.data.maxiterations/2;
     for(let x = 0; x < e.data.width; x++){
