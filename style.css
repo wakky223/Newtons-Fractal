@@ -22,3 +22,9 @@ canvas {
     height: 7px;
     padding: 0px;
 }
+
+#innerBar {
+    background-color: rgb(204, 2, 2);
+    width: 0px;
+    height: 100%;
+}

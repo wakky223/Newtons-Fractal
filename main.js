@@ -126,7 +126,7 @@ function nearRoot(v,rZero,iZero){
 function setScreen(rZero,iZero){
     console.time('drawFractal');
     p = createPolynomial([],rZero,iZero);
-    document.getElementById("div").innerHTML = polyToString(p);
+    document.getElementById("menu").innerHTML = polyToString(p);
     polyToString(p);
     var id = ctx.createImageData(c.width,c.height);
     var d = derivitive(p);
@@ -135,7 +135,6 @@ function setScreen(rZero,iZero){
     for(let x = 0; x < c.width; x++){
         for(let y = 0; y < c.height; y++){
             iterant = math.complex(scale * (x - h), -scale * (y - k));
-
             //iterate newtons method
             let distance = new Array(); 
             for(let i = 0;i < iterations;i++ ){
@@ -170,8 +169,7 @@ function setScreen(rZero,iZero){
             pixels[offset + 2] = b;
             pixels[offset + 3] = 255;
         }
-        elem.style.width = x + "px";
-        time.sleep(0.0001);
+        postMessage(x);
     }
     ctx.putImageData(id, 0, 0);
     console.timeEnd('drawFractal');
@@ -247,17 +245,28 @@ window.onkeypress = function(event) {
     }
 }   
 
-console.log('done');
+const w = new Worker("worker.js");
+
+onmessage = function(e) {
+    document.getElementById("innerBar").style.width = x + "px";
+}
 
 var c = document.getElementById("canvas");
 ctx = c.getContext("2d");
 c.width = window.innerWidth;
 c.height = window.innerHeight-7;
 
-var elem = document.getElementById("bar");
+var elem = document.getElementById("innerBar");
 
 var scale = 0.005;
 var h = c.width/2;
 var k = c.height/2;
 var maxiterations = 200;
 var shadingCoeficient = 10;
+
+console.log('done');
+
+w.postMessage({ 
+    rZero: [1,-0.5], 
+    iZero: [0,0.8660254037844386467637232]
+})
