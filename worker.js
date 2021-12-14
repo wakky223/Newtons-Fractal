@@ -150,6 +150,7 @@ function setScreen(rZero,iZero,e){
         postMessage(x);
     }
     console.timeEnd('drawFractal');
+    postMessage(polyToString(p));
     return e.data.id;
 }
 
