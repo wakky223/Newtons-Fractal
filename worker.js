@@ -1,5 +1,5 @@
 
-import "https://unpkg.com/mathjs@9.5.1/lib/browser/math.js";
+import math from "https://unpkg.com/mathjs@9.5.1/lib/browser/math.js";
 
 //multiplies two polynoials, inputs are arrays starting at the x^0 term. 
 function multiplyPoly(p1,p2){
