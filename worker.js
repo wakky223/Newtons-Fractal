@@ -135,9 +135,7 @@ function iterate (v,p,d){
 }
 
 function addComplex(a,b){
-    a.re += b.re;
-    a.im += b.im;
-    return a;
+    return math.complex(a.re + b.re,a.re + b.re);
 }
 
 function multiplyComplex(a,b){
