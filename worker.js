@@ -115,10 +115,10 @@ function derivitive(p){
 function eval(p, input) {
     let r = math.complex(p[0],0);
     let x = input;
-    r = math.add(r,math.multiply(p[1] , input));
+    r = addComplex(r,math.multiply(p[1] , input));
         for (let i = 2; i < p.length; i++) {
             x = math.multiply(x,input)
-            r = math.add(r,math.multiply(p[i] , x));
+            r = addComplex(r,math.multiply(p[i] , x));
         }
     return r;
 }
@@ -128,7 +128,7 @@ function iterate (v,p,d){
     let r = eval(p,v);
     r.re = -r.re;
     r.im = -r.im;
-    r = math.divide(r,eval(d,v));
+    r = divideComplex(r,eval(d,v));
     r.re += v.re;
     r.im += v.im;
     return r; 
