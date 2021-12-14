@@ -44,7 +44,8 @@ var elem = document.getElementById("innerBar");
 
 
 console.log('done');
-
+ctx = c.getContext("2d");
+var id = ctx.createImageData(c.width,c.height);
 w.postMessage({ 
     rZero: [1,-0.5], 
     iZero: [0,0.8660254037844386467637232],
@@ -53,4 +54,7 @@ w.postMessage({
     k: c.height/2,
     maxiterations: 200,
     shadingCoeficient: 10,
-},[c,math])
+    width: c.width,
+    height: c.height,
+    id: id,
+},math)

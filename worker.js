@@ -128,14 +128,12 @@ function setScreen(rZero,iZero){
     console.time('drawFractal');
     p = createPolynomial([],rZero,iZero);
     document.getElementById("menu").innerHTML = polyToString(p);
+    var pixels = e.data.id.data;
     polyToString(p);
-    ctx = c.getContext("2d");
-    var id = ctx.createImageData(c.width,c.height);
     var d = derivitive(p);
-    iterations = e.data.maxiterations/2
-    var pixels = id.data;
-    for(let x = 0; x < c.width; x++){
-        for(let y = 0; y < c.height; y++){
+    iterations = e.data.maxiterations/2;
+    for(let x = 0; x < e.data.width; x++){
+        for(let y = 0; y < e.data.height; y++){
             iterant = math.complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
             //iterate newtons method
             let distance = new Array(); 
@@ -165,11 +163,11 @@ function setScreen(rZero,iZero){
                 var b = 0;
             }
 
-            var offset = (y * id.width + x) * 4;
-            pixels[offset] = r;
-            pixels[offset + 1] = g;
-            pixels[offset + 2] = b;
-            pixels[offset + 3] = 255;
+            var offset = (y * e.data.width + x) * 4;
+            e.data.pixels[offset] = r;
+            e.data.pixels[offset + 1] = g;
+            e.data.pixels[offset + 2] = b;
+            e.data.pixels[offset + 3] = 255;
         }
         postMessage(x);
     }
@@ -217,5 +215,6 @@ function polyToString(p){
 }
 
 onmessage = function(e) {
-    setScreen(e.data.rZero,e.data.iZero);
+    a = setScreen(e.data.rZero,e.data.iZero);
+    postMessage(a);
 }
