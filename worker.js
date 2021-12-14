@@ -128,14 +128,14 @@ function iterate (v,p,d){
     let r = eval(p,v);
     r.re = -r.re;
     r.im = -r.im;
-    r = math.divide(r,eval(d,v));
+    r = divideComplex(r,eval(d,v));
     r.re += v.re;
     r.im += v.im;
     return r; 
 }
 
 function addComplex(a,b){
-    return math.complex(a.re + b.re,a.re + b.re);
+    return math.complex(a.re + b.re,a.im + b.im);
 }
 
 function multiplyComplex(a,b){
