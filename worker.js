@@ -115,10 +115,10 @@ function derivitive(p){
 function eval(p, input) {
     let r = math.complex(p[0],0);
     let x = input;
-    r = math.add(r,multiplyComplex(p[1] , input));
+    r = math.add(r,math.multiply(p[1] , input));
         for (let i = 2; i < p.length; i++) {
-            x = multiplyComplex(x,input)
-            r = math.add(r,multiplyComplex(p[i] , x));
+            x = math.multiply(x,input)
+            r = math.add(r,math.multiply(p[i] , x));
         }
     return r;
 }
