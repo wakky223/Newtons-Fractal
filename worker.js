@@ -101,42 +101,6 @@ function divideComplex(a,b){
 
 }
 
-/*
-code moved into setScreen func, likely outdated.
-
-//iterates newtons method
-function newtonsMethod (v,p,d,rZero,iZero){
-    iterations = e.data.maxiterations/2
-    for(let i = 0;i < iterations;i++ ){
-        v = iterate(v,p,d);
-        v = iterate(v,p,d);
-        let distance = new Array(); 
-        for(let i = 0; i < rZero.length; i++){
-            distance[i] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (iZero[i]-v.im) * (iZero[i]-v.im));
-        }
-        for(let i = 0; i < rZero.length; i++){
-            distance[i + rZero.length] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (-iZero[i]-v.im) * (-iZero[i]-v.im));
-        } 
-        if(math.min(distance) < 0.01){
-            i = iterations;
-        }
-    }
-    return v;
-}
-
-function nearRoot(v,rZero,iZero){
-    let distance = new Array(); 
-    for(let i = 0; i < rZero.length; i++){
-        distance[i] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (iZero[i]-v.im) * (iZero[i]-v.im));
-    }
-    for(let i = 0; i < rZero.length; i++){
-        distance[i + rZero.length] = math.sqrt( ((rZero[i]-v.re) * (rZero[i]-v.re)) + (-iZero[i]-v.im) * (-iZero[i]-v.im));
-    }
-    const min = math.min(distance);
-    return distance.indexOf(min);
-}
-*/
-
 //sets the screen
 function setScreen(rZero,iZero,e){
     h = e.data.width/2;
