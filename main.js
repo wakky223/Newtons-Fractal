@@ -32,11 +32,11 @@ window.onkeypress = function(event) {
 const w = new Worker("worker.js");
 
 w.onmessage = function(e) {
-    if(typeof e == "number"){
-    document.getElementById("innerBar").style.width = e + "px";
+    if(typeof e.data == "number"){
+    document.getElementById("innerBar").style.width = e.data + "px";
     console.log(e + "% updated")
-    }else if(typeof e == "object"){
-        ctx.putImageData(e, 0, 0);
+    }else if(typeof e.data == "object"){
+        ctx.putImageData(e.data, 0, 0);
     }
 }
 
