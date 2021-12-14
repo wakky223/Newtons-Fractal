@@ -32,7 +32,12 @@ window.onkeypress = function(event) {
 const w = new Worker("worker.js");
 
 onmessage = function(e) {
-    document.getElementById("innerBar").style.width = x + "px";
+    if(typeof e == "number"){
+    document.getElementById("innerBar").style.width = e + "px";
+    console.log(e + "% updated")
+    }else if(typeof e == "object"){
+        ctx.putImageData(e, 0, 0);
+    }
 }
 
 var c = document.getElementById("canvas");

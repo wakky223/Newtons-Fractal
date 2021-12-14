@@ -212,8 +212,9 @@ function setScreen(rZero,iZero,e){
         }
         postMessage(x);
     }
-    ctx.putImageData(id, 0, 0);
+    
     console.timeEnd('drawFractal');
+    return id;
 }
 
 //converts a polynomial to a string
