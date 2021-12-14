@@ -168,6 +168,8 @@ function nearRoot(v,rZero,iZero){
 
 //sets the screen
 function setScreen(rZero,iZero,e){
+    h = e.data.width/2;
+    k = e.data.height/2;
     console.time('drawFractal');
     p = createPolynomial([],rZero,iZero);
     polyToString(p);
@@ -175,7 +177,7 @@ function setScreen(rZero,iZero,e){
     iterations = e.data.maxiterations/2;
     for(let x = 0; x < e.data.width; x++){
         for(let y = 0; y < e.data.height; y++){
-            iterant = math.complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
+            iterant = math.complex(e.data.scale * (x - h), -e.data.scale * (y - k));
             //iterate newtons method
             let distance = new Array(); 
             for(let i = 0;i < iterations;i++ ){

@@ -9,23 +9,68 @@ window.onkeypress = function(event) {
     }else if(event.keyCode == 49){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([1,-0.5],[0,0.8660254037844386467637232]);
+        w.postMessage({ 
+            rZero: [1,-0.5], 
+            iZero: [0,0.8660254037844386467637232],
+            scale: scale,
+            maxiterations: 200,
+            shadingCoeficient: 10,
+            width: c.width,
+            height: c.height,
+            id: id,
+        });
     }else if(event.keyCode == 50){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
+        w.postMessage({ 
+            rZero: [-1.769292354238631415240409,0.8846461771193157076202047], 
+            iZero: [0,0.5897428050222055016472807],
+            scale: scale,
+            maxiterations: 200,
+            shadingCoeficient: 10,
+            width: c.width,
+            height: c.height,
+            id: id,
+        });
     }else if(event.keyCode == 51){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([1,0],[0,1]);
+        w.postMessage({ 
+            rZero: [1,0], 
+            iZero: [0,1],
+            scale: scale,
+            maxiterations: 200,
+            shadingCoeficient: 10,
+            width: c.width,
+            height: c.height,
+            id: id,
+        });
     }else if(event.keyCode == 52){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([math.random()*10,math.random()*10],[0,math.random()*10]);
+        w.postMessage({ 
+            rZero: [math.random()*10,math.random()*10], 
+            iZero: [0,math.random()*10],
+            scale: scale,
+            maxiterations: 200,
+            shadingCoeficient: 10,
+            width: c.width,
+            height: c.height,
+            id: id,
+        });
     }else if(event.keyCode == 53){
         console.log("Scale: " + scale);
         console.log("Drawing: ");
-        setScreen([math.random()*10,math.random()*10],[math.random()*10,math.random()*10]);
+        w.postMessage({ 
+            rZero: [math.random()*10,math.random()*10], 
+            iZero: [math.random()*10,math.random()*10],
+            scale: scale,
+            maxiterations: 200,
+            shadingCoeficient: 10,
+            width: c.width,
+            height: c.height,
+            id: id,
+        });
     }
 }   
 
@@ -42,23 +87,12 @@ w.onmessage = function(e) {
 var c = document.getElementById("canvas");
 c.width = window.innerWidth;
 c.height = window.innerHeight-7;
-
+var scale = 0.005;
 var elem = document.getElementById("innerBar");
 
 
-
-console.log('done');
 ctx = c.getContext("2d");
 var id = ctx.createImageData(c.width,c.height);
-w.postMessage({ 
-    rZero: [1,-0.5], 
-    iZero: [0,0.8660254037844386467637232],
-    scale: 0.005,
-    h: c.width/2,
-    k: c.height/2,
-    maxiterations: 200,
-    shadingCoeficient: 10,
-    width: c.width,
-    height: c.height,
-    id: id,
-})
+console.log('done');
+
+
