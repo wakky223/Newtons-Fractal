@@ -211,9 +211,7 @@ function setScreen(rZero,iZero,e){
             e.data.id.data[offset + 3] = 255;
         }
         postMessage(x);
-        console.log("posted: " + x);
     }
-    
     console.timeEnd('drawFractal');
     return e.data.id;
 }

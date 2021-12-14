@@ -33,8 +33,7 @@ const w = new Worker("worker.js");
 
 w.onmessage = function(e) {
     if(typeof e.data == "number"){
-    document.getElementById("innerBar").style.width = e.data + "px";
-    console.log(e + "% updated")
+    document.getElementById("innerBar").style.width = e.data + 1 +  "px";
     }else if(typeof e.data == "object"){
         ctx.putImageData(e.data, 0, 0);
     }
