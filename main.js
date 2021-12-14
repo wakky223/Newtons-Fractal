@@ -31,7 +31,7 @@ window.onkeypress = function(event) {
 
 const w = new Worker("worker.js");
 
-onmessage = function(e) {
+w.onmessage = function(e) {
     if(typeof e == "number"){
     document.getElementById("innerBar").style.width = e + "px";
     console.log(e + "% updated")
