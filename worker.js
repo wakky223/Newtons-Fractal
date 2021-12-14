@@ -128,7 +128,7 @@ function iterate (v,p,d){
     let r = eval(p,v);
     r.re = -r.re;
     r.im = -r.im;
-    r = divideComplex(r,eval(d,v));
+    r = math.divide(r,eval(d,v));
     r.re += v.re;
     r.im += v.im;
     return r; 
