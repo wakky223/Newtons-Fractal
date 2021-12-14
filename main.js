@@ -84,7 +84,7 @@ w.onmessage = function(e) {
     }else if(typeof e.data == "object"){
         ctx.putImageData(e.data, 0, 0);
     }else if(typeof e.data == "string"){
-        document.getElementById("innerBar").innerHTML = e.data;
+        document.getElementById("menu").innerHTML = e.data;
     }
 }
 
