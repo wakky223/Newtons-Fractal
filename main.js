@@ -74,25 +74,30 @@ window.onkeypress = function(event) {
     }
 }   
 
-const w = new Worker("worker.js");
+//make sure web workers are supported
+if (window.Worker) {
+    //create the web worker
+    const w = new Worker("worker.js");
 
-w.onmessage = function(e) {
-    if(typeof e.data == "number"){
-    document.getElementById("innerBar").style.width = e.data + 1 +  "px";
-    }else if(typeof e.data == "object"){
-        ctx.putImageData(e.data, 0, 0);
+    //setup worker message 
+    w.onmessage = function(e) {
+        if(typeof e.data == "number"){
+        document.getElementById("innerBar").style.width = e.data + 1 +  "px";
+        }else if(typeof e.data == "object"){
+            ctx.putImageData(e.data, 0, 0);
+        }
     }
+
+    var c = document.getElementById("canvas");
+    c.width = window.innerWidth;
+    c.height = window.innerHeight-7;
+    var scale = 0.005;
+    var elem = document.getElementById("innerBar");
+
+
+    ctx = c.getContext("2d");
+    var id = ctx.createImageData(c.width,c.height);
+    console.log('done');
+}else{
+    document.getElementById("menu").style.width = "Error, your browser does not support required features.";
 }
-
-var c = document.getElementById("canvas");
-c.width = window.innerWidth;
-c.height = window.innerHeight-7;
-var scale = 0.005;
-var elem = document.getElementById("innerBar");
-
-
-ctx = c.getContext("2d");
-var id = ctx.createImageData(c.width,c.height);
-console.log('done');
-
-
