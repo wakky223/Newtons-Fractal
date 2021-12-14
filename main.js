@@ -53,4 +53,4 @@ w.postMessage({
     k: c.height/2,
     maxiterations: 200,
     shadingCoeficient: 10,
-},c)
+},[c,math])
