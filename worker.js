@@ -167,10 +167,9 @@ function nearRoot(v,rZero,iZero){
 }
 
 //sets the screen
-function setScreen(rZero,iZero){
+function setScreen(rZero,iZero,e){
     console.time('drawFractal');
     p = createPolynomial([],rZero,iZero);
-    var pixels = e.data.id.data;
     polyToString(p);
     var d = derivitive(p);
     iterations = e.data.maxiterations/2;
@@ -205,11 +204,11 @@ function setScreen(rZero,iZero){
                 var b = 0;
             }
 
-            var offset = (y * e.data.width + x) * 4;
-            e.data.pixels[offset] = r;
-            e.data.pixels[offset + 1] = g;
-            e.data.pixels[offset + 2] = b;
-            e.data.pixels[offset + 3] = 255;
+            var offset = (y * e.data.id.width + x) * 4;
+            e.data.id.data[offset] = r;
+            e.data.id.data[offset + 1] = g;
+            e.data.id.data[offset + 2] = b;
+            e.data.id.data[offset + 3] = 255;
         }
         postMessage(x);
     }
@@ -257,6 +256,6 @@ function polyToString(p){
 }
 
 onmessage = function(e) {
-    a = setScreen(e.data.rZero,e.data.iZero);
+    a = setScreen(e.data.rZero,e.data.iZero,e);
     postMessage(a);
 }
