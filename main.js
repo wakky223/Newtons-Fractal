@@ -57,4 +57,4 @@ w.postMessage({
     width: c.width,
     height: c.height,
     id: id,
-},math)
+})
