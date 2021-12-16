@@ -140,7 +140,7 @@ function setScreen(rZero,iZero,e){
                     var r = shading * e.data.shadingCoeficient;
                     var g = 254 - shading * e.data.shadingCoeficient;
                     var b = shading * e.data.shadingCoeficient;
-                }else if(distance.indeoxOf(closestRoot) == 2){
+                }else if(distance.indexOf(closestRoot) == 2){
                     var r = shading * e.data.shadingCoeficient;
                     var g = shading * e.data.shadingCoeficient;
                     var b = 254 - shading * e.data.shadingCoeficient;
