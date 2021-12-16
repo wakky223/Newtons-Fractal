@@ -132,22 +132,36 @@ function setScreen(rZero,iZero,e){
             //set the color for the pixel
             const closestRoot = math.min(distance);
             if(closestRoot < 0.00001 ){
-                if(distance.indexOf(closestRoot) ==  0){
-                    var r = 254 - shading * e.data.shadingCoeficient;
-                    var g = shading * e.data.shadingCoeficient;
-                    var b = shading * e.data.shadingCoeficient;
-                }else if(distance.indexOf(closestRoot) == 1){
-                    var r = shading * e.data.shadingCoeficient;
-                    var g = 254 - shading * e.data.shadingCoeficient;
-                    var b = shading * e.data.shadingCoeficient;
-                }else if(distance.indexOf(closestRoot) == 2){
-                    var r = shading * e.data.shadingCoeficient;
-                    var g = shading * e.data.shadingCoeficient;
-                    var b = 254 - shading * e.data.shadingCoeficient;
-                }else{
-                    var r = 254 - shading * e.data.shadingCoeficient;
-                    var g = 254 - shading * e.data.shadingCoeficient;
-                    var b = 254 - shading * e.data.shadingCoeficient;
+                switch (distance.indexOf(closestRoot)) {
+                    case 0:
+                        var r = 255 - shading * e.data.shadingCoeficient;
+                        var g = shading * e.data.shadingCoeficient;
+                        var b = shading * e.data.shadingCoeficient;
+                        break;
+                    case 1:
+                        var r = shading * e.data.shadingCoeficient;
+                        var g = 255 - shading * e.data.shadingCoeficient;
+                        var b = shading * e.data.shadingCoeficient;
+                        break;
+                    case 2:
+                        var r = shading * e.data.shadingCoeficient;
+                        var g = shading * e.data.shadingCoeficient;
+                        var b = 255 - shading * e.data.shadingCoeficient;
+                        break;
+                    case 3:
+                        var r = 255 - shading * e.data.shadingCoeficient;
+                        var g = 255 - shading * e.data.shadingCoeficient;
+                        var b = shading * e.data.shadingCoeficient;
+                        break;
+                    case 4:
+                        var r = shading * e.data.shadingCoeficient;
+                        var g = 255 - shading * e.data.shadingCoeficient; 
+                        var b = 255 - shading * e.data.shadingCoeficient;
+                        break;
+                    default:
+                        var r = 255 - shading * e.data.shadingCoeficient;
+                        var g = 255 - shading * e.data.shadingCoeficient;
+                        var b = 255 - shading * e.data.shadingCoeficient;
                 }
             }else{
                 var r = 0;
