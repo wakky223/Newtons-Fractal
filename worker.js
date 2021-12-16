@@ -132,9 +132,23 @@ function setScreen(rZero,iZero,e){
             //set the color for the pixel
             const closestRoot = math.min(distance);
             if(closestRoot < 0.00001 ){
-                var g =  distance.indexOf(closestRoot) * 63.75;
-                var r = 80 + shading * e.data.shadingCoeficient;
-                var b = 80 + shading * e.data.shadingCoeficient;
+                if(distance.indexOf(closestRoot)  ==  0){
+                    var r = 255 - shading * e.data.shadingCoeficient;
+                    var g = shading * e.data.shadingCoeficient;
+                    var b = shading * e.data.shadingCoeficient;
+                }else if(distance.indexOf(closestRoot) == 1){
+                    var r = shading * e.data.shadingCoeficient;
+                    var g = 255 - shading * e.data.shadingCoeficient;
+                    var b = shading * e.data.shadingCoeficient;
+                }else if(distance.indeoxOf(closestRoot) == 2){
+                    var r = shading * e.data.shadingCoeficient;
+                    var g = shading * e.data.shadingCoeficient;
+                    var b = 255 - shading * e.data.shadingCoeficient;
+                }else{
+                    var r = 255 - shading * e.data.shadingCoeficient;
+                    var g = 255 - shading * e.data.shadingCoeficient;
+                    var b = 255 - shading * e.data.shadingCoeficient;
+                }
             }else{
                 var r = 0;
                 var g = 0;
