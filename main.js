@@ -47,26 +47,34 @@ function init(){
 }
 
 //listen for keypresses
+// TODO: fix all of this and turn it into actual menus.
 window.onkeypress = function(event) {
-    if (event.keyCode == 48) {
+    if (event.keyCode == 48) { //0
         scale *= 0.5;
         console.log(scale);
-    } else if(event.keyCode == 57){
+    } else if(event.keyCode == 57){ //9
         scale *= 2;
         console.log(scale);
-    }else if(event.keyCode == 49){
+    }else if(event.keyCode == 49){ //1
         init();
         draw([1,-0.5],[0,0.8660254037844386467637232]);
-    }else if(event.keyCode == 50){
+    }else if(event.keyCode == 50){ //2
         init();
         draw([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
-    }else if(event.keyCode == 51){
+    }else if(event.keyCode == 51){ //3
         init();
         draw([1,0],[0,1]);
-    }else if(event.keyCode == 52){
+    }else if(event.keyCode == 52){ //4
+        init();
+        draw([0.586992498352664,-1.17398499670533,-0.425899821039621,0.851799642079243],[1.016700830808605,0,0.737680128975117,0]);
+    }else if(event.keyCode == 53){ //5
+        
+    }else if(event.keyCode == 54){ //6
+        
+    }else if(event.keyCode == 55){ //7
         init();
         draw([math.random()*10,math.random()*10],[0,math.random()*10]);
-    }else if(event.keyCode == 53){
+    }else if(event.keyCode == 56){ //8
         init();
         draw([math.random()*10,math.random()*10],[math.random()*10,math.random()*10]);
     }
