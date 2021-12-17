@@ -17,8 +17,8 @@ function draw(rZero,iZero){
             width: c.width,
             height: c.height,
             id: id,
-            h: c.width/2 - (i *(c.width/numThreads)),
-            k: c.height/2
+            h: c.width/2 - (i *(c.width/numThreads)) + h,
+            k: c.height/2 + k
         });
     }
 }
@@ -82,6 +82,8 @@ ctx = c.getContext("2d");
 
 //initialize scale & progress bar 
 var scale = 0.005;
+var h = 0;
+var k = 0;
 var bar = document.getElementById("innerBar");
 var barWidth = 0;
 
