@@ -25,8 +25,8 @@ function draw(rZero,iZero){
 
 function init(){
     //create the web worker
-    const numThreads = 1;
-    var w;
+    numThreads = 1;
+    w = [];
     for(let i = 0; i < numThreads;i++){
         w[i] = new Worker("worker.js");
     }
