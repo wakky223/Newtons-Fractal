@@ -1,3 +1,22 @@
+function draw(rZero,iZero){
+    console.log("Scale: " + scale);
+    console.log("Max iterations: " + "200");
+    console.log("Shading Coeficient: " + shadingCoeficient);
+    console.log("Width: " + c.width);
+    console.log("Height: " + c.height);
+    var id = ctx.createImageData(c.width,c.height);
+    w.postMessage({ 
+        rZero: rZero, 
+        iZero: iZero,
+        scale: scale,
+        maxiterations: 200,
+        shadingCoeficient: 10,
+        width: c.width,
+        height: c.height,
+        id: id,
+    });
+}
+
 //listen for keypresses
 window.onkeypress = function(event) {
     if (event.keyCode == 48) {
@@ -7,70 +26,15 @@ window.onkeypress = function(event) {
         scale *= 2;
         console.log(scale);
     }else if(event.keyCode == 49){
-        console.log("Scale: " + scale);
-        console.log("Drawing: ");
-        w.postMessage({ 
-            rZero: [1,-0.5], 
-            iZero: [0,0.8660254037844386467637232],
-            scale: scale,
-            maxiterations: 200,
-            shadingCoeficient: 10,
-            width: c.width,
-            height: c.height,
-            id: id,
-        });
+        draw([1,-0.5],[0,0.8660254037844386467637232]);
     }else if(event.keyCode == 50){
-        console.log("Scale: " + scale);
-        console.log("Drawing: ");
-        w.postMessage({ 
-            rZero: [-1.769292354238631415240409,0.8846461771193157076202047], 
-            iZero: [0,0.5897428050222055016472807],
-            scale: scale,
-            maxiterations: 200,
-            shadingCoeficient: 10,
-            width: c.width,
-            height: c.height,
-            id: id,
-        });
+        draw([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
     }else if(event.keyCode == 51){
-        console.log("Scale: " + scale);
-        console.log("Drawing: ");
-        w.postMessage({ 
-            rZero: [1,0], 
-            iZero: [0,1],
-            scale: scale,
-            maxiterations: 200,
-            shadingCoeficient: 10,
-            width: c.width,
-            height: c.height,
-            id: id,
-        });
+        draw([1,0],[0,1]);
     }else if(event.keyCode == 52){
-        console.log("Scale: " + scale);
-        console.log("Drawing: ");
-        w.postMessage({ 
-            rZero: [math.random()*10,math.random()*10], 
-            iZero: [0,math.random()*10],
-            scale: scale,
-            maxiterations: 200,
-            shadingCoeficient: 10,
-            width: c.width,
-            height: c.height,
-            id: id,
-        });
+        draw([math.random()*10,math.random()*10],[0,math.random()*10]);
     }else if(event.keyCode == 53){
-        console.log("Scale: " + scale);
-        console.log("Drawing: ");
-        w.postMessage({ 
-            rZero: [math.random()*10,math.random()*10], 
-            iZero: [math.random()*10,math.random()*10],
-            scale: scale,
-            maxiterations: 200,
-            shadingCoeficient: 10,
-            width: c.width,
-            height: c.height,
-            id: id,
-        });
+        draw([math.random()*10,math.random()*10],[math.random()*10,math.random()*10]);
     }
 }   
 
