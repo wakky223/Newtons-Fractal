@@ -17,7 +17,7 @@ function draw(rZero,iZero){
             width: c.width,
             height: c.height,
             id: id,
-            h: c.width/2,
+            h: c.width - (Math.ceil(c.width/numThreads) * i-1),
             k: c.height/2
         });
     }

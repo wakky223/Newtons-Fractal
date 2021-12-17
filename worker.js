@@ -108,8 +108,8 @@ function setScreen(rZero,iZero,e){
     postMessage("Drawing: " + polyToString(p));
     var d = derivitive(p);
     iterations = e.data.maxiterations/2;
-    for(let x = 0; x < e.data.width; x++){
-        for(let y = 0; y < e.data.height; y++){
+    for(let x = 0; x < e.data.id.width; x++){
+        for(let y = 0; y < e.data.id.height; y++){
             iterant = math.complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
             //iterate newtons method
             let distance = new Array(); 
