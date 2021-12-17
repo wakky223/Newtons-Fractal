@@ -73,10 +73,10 @@ window.onkeypress = function(event) {
         
     }else if(event.keyCode == 55){ //7
         init();
-        draw([math.random()*10,math.random()*10],[0,math.random()*10]);
+        draw([Math.random()*10,Math.random()*10],[0,Math.random()*10]);
     }else if(event.keyCode == 56){ //8
         init();
-        draw([math.random()*10,math.random()*10],[math.random()*10,math.random()*10]);
+        draw([Math.random()*10,Math.random()*10],[Math.random()*10,Math.random()*10]);
     }
 }   
 
