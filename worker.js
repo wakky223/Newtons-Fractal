@@ -222,4 +222,5 @@ function polyToString(p){
 onmessage = function(e) {
     a = setScreen(e.data.rZero,e.data.iZero,e);
     postMessage(a);
+    self.close();
 }
