@@ -17,7 +17,7 @@ function draw(rZero,iZero){
             width: c.width,
             height: c.height,
             id: id,
-            h: c.width - (Math.ceil(c.width/numThreads) * i-1),
+            h: c.width/2 - (i *(c.width/numThreads)),
             k: c.height/2
         });
     }
@@ -25,7 +25,7 @@ function draw(rZero,iZero){
 
 function init(){
     //create the web worker
-    numThreads = 1;
+    numThreads = window.navigator.hardwareConcurrency;
     w = [];
     for(let i = 0; i < numThreads;i++){
         w[i] = new Worker("worker.js");
