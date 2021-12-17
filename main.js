@@ -4,7 +4,7 @@ function draw(rZero,iZero){
     console.log("Shading Coeficient: " + 10);
     console.log("Width: " + c.width);
     console.log("Height: " + c.height);
-    bar = "0px";
+    bar.style.width = "0px";
     barWidth = 0;
     for(let i = 0; i < numThreads;i++){
         var id = ctx.createImageData(Math.ceil(c.width/numThreads),c.height);
@@ -34,11 +34,11 @@ function init(){
     //setup worker onmessage function 
     for(let i = 0; i < numThreads;i++){
         w[i].onmessage = function(e) {
-            if(typeof e.data == "undefined"){
+            if(typeof e.data == 'undefined'){
             barWidth++;
-            bar = barWidth + "px";
+            bar.style.width = barWidth + "px";
             }else if(typeof e.data == "object"){
-                ctx.putImageData(e.data, Math.ceil(c.width/numThreads), 0);
+                ctx.putImageData(e.data, Math.ceil(c.width/numThreads) * i, 0);
             }else if(typeof e.data == "string"){
                 document.getElementById("menu").innerHTML = e.data;
             }
@@ -82,7 +82,7 @@ ctx = c.getContext("2d");
 
 //initialize scale & progress bar 
 var scale = 0.005;
-var bar = document.getElementById("innerBar").style.width;
+var bar = document.getElementById("innerBar");
 var barWidth = 0;
 
 console.log('Ready.');
