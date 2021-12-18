@@ -72,7 +72,7 @@ function eval(p, input) {
     let x = complex(input,0);
     r = addComplex(r,multiplyComplex(p[1] , x));
         for (let i = 2; i < p.length; i++) {
-            x = multiplyComplex(x,complex(input,0))
+            x = multiplyComplex(x,input)
             r = addComplex(r,multiplyComplex(p[i] , x));
         }
     return r;
@@ -100,10 +100,23 @@ function addComplex(a,b){
     }
 }
 function multiplyComplex(a,b){
-    return{
-        re: (a.re * b.re) - (a.im * b.im),
-        im: (a.im * b.re) + (a.re * b.im)
+    if(a.re != NaN && b.re != NaN){
+        return{
+            re: (a.re * b.re) - (a.im * b.im),
+            im: (a.im * b.re) + (a.re * b.im)
+        }
+    }else if(b.re == NaN){
+        return{
+            re: a.re * b,
+            im: a.im * b
+        }
+    }else if(a.re == NaN){
+        return{
+            re: b.re * a,
+            im: b.im * a
+        }
     }
+    
 }
 function divideComplex(a,b){
     let denominator = (b.re * b.re) + (b.im * b.im);
