@@ -151,7 +151,7 @@ function setScreen(rZero,iZero,e){
                 for(let i = 0; i < rZero.length; i++){
                     distance[i + rZero.length] = Math.sqrt( ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (-iZero[i]-iterant.im) * (-iZero[i]-iterant.im));
                 } 
-                if(Math.min(distance) < 0.00001){
+                if(Math.min(...distance) < 0.00001){
                     var shading = i;
                     i = iterations;
                 }
