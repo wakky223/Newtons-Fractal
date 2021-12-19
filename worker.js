@@ -99,23 +99,27 @@ function addComplex(a,b){
     }
 }
 function multiplyComplex(a,b){
-    if(a.re != NaN && b.re != NaN){
-        return{
-            re: (a.re * b.re) - (a.im * b.im),
-            im: (a.im * b.re) + (a.re * b.im)
+    if(typeof a != "number" && typeof b != "number"){
+        return {
+        re: (a.re * b.re) - (a.im * b.im),
+        im: (a.im * b.re) + (a.re * b.im)
         }
-    }else if(b.re == NaN){
+    }else if(typeof a == "number" && typeof b == "number"){
+        return{
+            re: a * b,
+            im: 0
+        }
+    }else if(typeof b == "number" && typeof a != "number"){
         return{
             re: a.re * b,
             im: a.im * b
         }
-    }else if(a.re == NaN){
+    }else if(typeof a  == "number" && typeof b != "number"){
         return{
             re: b.re * a,
             im: b.im * a
-        }
+        } 
     }
-    
 }
 function divideComplex(a,b){
     let denominator = (b.re * b.re) + (b.im * b.im);
