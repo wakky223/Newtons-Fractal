@@ -1,4 +1,5 @@
 function draw(rZero,iZero){
+    init();
     console.log("Scale: " + scale);
     console.log("Max iterations: " + "200");
     console.log("Shading Coeficient: " + 10);
@@ -52,31 +53,39 @@ window.onkeypress = function(event) {
     if (event.keyCode == 48) { //0
         scale *= 0.5;
         console.log(scale);
+        draw(real,imaginary);
     } else if(event.keyCode == 57){ //9
         scale *= 2;
         console.log(scale);
+        draw(real,imaginary);
     }else if(event.keyCode == 49){ //1
-        init();
-        draw([1,-0.5],[0,0.8660254037844386467637232]);
+        real = [1,-0.5];
+        imaginary = [0,0.8660254037844386467637232];
+        draw(real,imaginary);
     }else if(event.keyCode == 50){ //2
-        init();
-        draw([-1.769292354238631415240409,0.8846461771193157076202047],[0,0.5897428050222055016472807]);
+        real = [-1.769292354238631415240409,0.8846461771193157076202047];
+        imaginary = [0,0.5897428050222055016472807];
+        draw(real,imaginary);
     }else if(event.keyCode == 51){ //3
-        init();
-        draw([1,0],[0,1]);
+        real = [1,0];
+        imaginary = [0,1];
+        draw(real,imaginary);
     }else if(event.keyCode == 52){ //4
-        init();
-        draw([0.586992498352664,-1.17398499670533,-0.425899821039621,0.851799642079243],[1.016700830808605,0,0.737680128975117,0]);
+        real = [0.586992498352664,-1.17398499670533,-0.425899821039621,0.851799642079243];
+        imaginary = [1.016700830808605,0,0.737680128975117,0];
+        draw(real,imaginary);
     }else if(event.keyCode == 53){ //5
         
     }else if(event.keyCode == 54){ //6
-        
+
     }else if(event.keyCode == 55){ //7
-        init();
+        real = [Math.random()*10,Math.random()*10];
+        imaginary = [0,Math.random()*10];
         draw([Math.random()*10,Math.random()*10],[0,Math.random()*10]);
     }else if(event.keyCode == 56){ //8
-        init();
-        draw([Math.random()*10,Math.random()*10],[Math.random()*10,Math.random()*10]);
+        real = [Math.random()*10,Math.random()*10];
+        imaginary = [Math.random()*10,Math.random()*10];
+        draw(real,imaginary);
     }
 }   
 
@@ -94,5 +103,8 @@ var h = 0;
 var k = 0;
 var bar = document.getElementById("innerBar");
 var barWidth = 0;
+
+var real = [1,-0.5];
+var imaginary = [0,0.8660254037844386467637232];
 
 console.log('Ready.');
