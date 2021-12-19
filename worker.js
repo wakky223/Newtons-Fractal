@@ -69,8 +69,9 @@ function derivitive(p){
 //evaluates a polynomial at a given input
 function eval(p, input) {
     let r = complex(p[0],0);
-    let x = input;
-        for (let i = 1; i < p.length; i++) {
+    let x = complex(input,0);
+    r = addComplex(r,multiplyComplex(p[1],x));
+        for (let i = 2; i < p.length; i++) {
             x = multiplyComplex(x,input)
             r = addComplex(r,multiplyComplex(p[i] , x));
         }
