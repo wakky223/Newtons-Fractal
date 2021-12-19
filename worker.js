@@ -157,7 +157,7 @@ function setScreen(rZero,iZero,e){
                 }
             }
             //set the color for the pixel
-            const closestRoot = Math.min(distance);
+            const closestRoot = Math.min(...distance);
             if(closestRoot < 0.00001 ){
                 switch (distance.indexOf(closestRoot)) {
                     case 0:
