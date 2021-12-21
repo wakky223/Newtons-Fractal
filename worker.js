@@ -139,7 +139,7 @@ function setScreen(rZero,iZero,e){
     iterations = e.data.maxiterations/2;
     for(let x = 0; x < e.data.id.width; x++){
         for(let y = 0; y < e.data.id.height; y++){
-            iterant = complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
+            let iterant = complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
             //iterate newtons method
             let distance = new Array(); 
             for(let i = 0;i < iterations;i++ ){
@@ -251,5 +251,4 @@ function polyToString(p){
 onmessage = function(e) {
     a = setScreen(e.data.rZero,e.data.iZero,e);
     postMessage(a);
-    close();
 }
