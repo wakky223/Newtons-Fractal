@@ -1,5 +1,4 @@
 function draw(rZero,iZero){
-    init();
     console.log("Scale: " + scale);
     console.log("Max iterations: " + "200");
     console.log("Shading Coeficient: " + 10);
@@ -81,7 +80,7 @@ window.onkeypress = function(event) {
     }else if(event.keyCode == 55){ //7
         real = [Math.random()*10,Math.random()*10];
         imaginary = [0,Math.random()*10];
-        draw([Math.random()*10,Math.random()*10],[0,Math.random()*10]);
+        draw(real,imaginary);
     }else if(event.keyCode == 56){ //8
         real = [Math.random()*10,Math.random()*10];
         imaginary = [Math.random()*10,Math.random()*10];
@@ -106,5 +105,6 @@ var barWidth = 0;
 
 var real = [1,-0.5];
 var imaginary = [0,0.8660254037844386467637232];
+init();
 
 console.log('Ready.');
