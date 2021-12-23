@@ -1,7 +1,7 @@
 function draw(rZero,iZero){
     console.log("Scale: " + scale);
     console.log("Max iterations: " + "200");
-    console.log("Shading Coeficient: " + 10);
+    console.log("Shading Coeficient: " + 9);
     console.log("Width: " + c.width);
     console.log("Height: " + c.height);
     bar.style.width = "0px";
@@ -13,7 +13,7 @@ function draw(rZero,iZero){
             iZero: iZero,
             scale: scale,
             maxiterations: 200,
-            shadingCoeficient: 10,
+            shadingCoeficient: 9,
             width: c.width,
             height: c.height,
             id: id,

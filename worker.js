@@ -23,31 +23,11 @@ function imaginaryPolynomialZeros(realPart, imaginaryPart) {
 }
 
 //creates a polynomial based on real and imaginary zeros; assumes each complex zero has a conjugate
-function createPolynomial(zeros,czerosRP,czerosIP) {
-    if (czerosRP.length != czerosIP.length) {
-        throw 'Coordinate Pair Exception.';
-    }
-    let r = new Array(zeros.length + czerosRP.length + czerosIP + 1).fill(0);
-    if (zeros.length > 0) {
-        r[0] = -zeros[0];
-        r[1] = 1;
-        console.log(r);
-        for (let i = 1; i < zeros.length; i++) {
-            r = multiplyPoly(r,[-zeros[i], 1]);
-        }
-        console.log(r);
-        for (let i = 0; i < czerosRP.length; i++) {
-            r = multiplyPoly(r, imaginaryPolynomialZeros(czerosRP[i], czerosIP[i]));
-        }
-        console.log(r);
-    } else if (czerosRP.length > 0) {
-        r = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0]);
-        for (let i = 0; i < zeros.length; i++) {
-            r = multiplyPoly(r, [-zeros[i], 1]);
-        }
-        for (let i = 1; i < czerosRP.length; i++) {
-            r = multiplyPoly(r, imaginaryPolynomialZeros(czerosRP[i], czerosIP[i]));
-        }
+function createPolynomial(czerosRP,czerosIP) {
+    let r = [0];
+    r = imaginaryPolynomialZeros(czerosRP[0], czerosIP[0]);
+    for (let i = 1; i < czerosRP.length; i++) {
+        r = multiplyPoly(r, imaginaryPolynomialZeros(czerosRP[i], czerosIP[i]));
     }
     for(let i = 0; i < r.length;i++){
         if( ((r[i] % 1) * (r[i] % 1)) % 1 < 0.000001 || ((r[i] % 1) * (r[i] % 1)) > 1 - 0.000001){
@@ -84,8 +64,7 @@ function iterate (v,p,d){
     r.re = -r.re;
     r.im = -r.im;
     r = divideComplex(r,eval(d,v));
-    r.re += v.re;
-    r.im += v.im;
+    r = addComplex(r,v);
     return r; 
 }
 
@@ -100,28 +79,18 @@ function addComplex(a,b){
     }
 }
 function multiplyComplex(a,b){
-    if(typeof a != "number" && typeof b != "number"){
-        return {
+    if(typeof a == "number"){
+        a = complex(a,0);
+    }
+    if(typeof b == "number"){
+      b = complex(b,0);
+    }
+    return {
         re: (a.re * b.re) - (a.im * b.im),
         im: (a.im * b.re) + (a.re * b.im)
         }
-    }else if(typeof a == "number" && typeof b == "number"){
-        return{
-            re: a * b,
-            im: 0
-        }
-    }else if(typeof b == "number" && typeof a != "number"){
-        return{
-            re: a.re * b,
-            im: a.im * b
-        }
-    }else if(typeof a  == "number" && typeof b != "number"){
-        return{
-            re: b.re * a,
-            im: b.im * a
-        } 
-    }
 }
+
 function divideComplex(a,b){
     let denominator = (b.re * b.re) + (b.im * b.im);
     return{
@@ -133,7 +102,7 @@ function divideComplex(a,b){
 //sets the screen
 function setScreen(rZero,iZero,e){
     console.time('drawFractal');
-    p = createPolynomial([],rZero,iZero);
+    p = createPolynomial(rZero,iZero);
     postMessage("Drawing: " + polyToString(p));
     var d = derivitive(p);
     iterations = e.data.maxiterations/2;
@@ -145,14 +114,15 @@ function setScreen(rZero,iZero,e){
             for(let i = 0;i < iterations;i++ ){
                 iterant = iterate(iterant,p,d);
                 iterant = iterate(iterant,p,d);
+                //the actual distance doesn't matter here so a faster, primative distance function can be used
                 for(let i = 0; i < rZero.length; i++){
-                    distance[i] = Math.sqrt( ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (iZero[i]-iterant.im) * (iZero[i]-iterant.im));
+                    distance[i] = ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (iZero[i]-iterant.im) * (iZero[i]-iterant.im);
                 }
                 for(let i = 0; i < rZero.length; i++){
-                    distance[i + rZero.length] = Math.sqrt( ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (-iZero[i]-iterant.im) * (-iZero[i]-iterant.im));
+                    distance[i + rZero.length] = ((rZero[i]-iterant.re) * (rZero[i]-iterant.re)) + (-iZero[i]-iterant.im) * (-iZero[i]-iterant.im);
                 } 
                 if(Math.min(...distance) < 0.00001){
-                    var shading = i;
+                    var shading = i * e.data.shadingCoeficient;
                     i = iterations;
                 }
             }
@@ -161,41 +131,38 @@ function setScreen(rZero,iZero,e){
             if(closestRoot < 0.00001 ){
                 switch (distance.indexOf(closestRoot)) {
                     case 0:
-                        var r = 255 - shading * e.data.shadingCoeficient;
-                        var g = shading * e.data.shadingCoeficient;
-                        var b = shading * e.data.shadingCoeficient;
+                        var r = 255 - shading;
+                        var g = shading * 0.5;
+                        var b = shading * 0.5;
                         break;
                     case 1:
-                        var r = shading * e.data.shadingCoeficient;
-                        var g = 255 - shading * e.data.shadingCoeficient;
-                        var b = shading * e.data.shadingCoeficient;
+                        var r = shading * 0.5;
+                        var g = 255 - shading ;
+                        var b = shading * 0.5;
                         break;
                     case 2:
-                        var r = shading * e.data.shadingCoeficient;
-                        var g = shading * e.data.shadingCoeficient;
-                        var b = 255 - shading * e.data.shadingCoeficient;
+                        var r = shading * 0.5;
+                        var g = shading * 0.5;
+                        var b = 255 - shading;
                         break;
                     case 3:
-                        var r = 255 - shading * e.data.shadingCoeficient;
-                        var g = 255 - shading * e.data.shadingCoeficient;
-                        var b = shading * e.data.shadingCoeficient;
+                        var r = 255 - shading;
+                        var g = 255 - shading;
+                        var b = shading * 0.5;
                         break;
                     case 4:
-                        var r = shading * e.data.shadingCoeficient;
-                        var g = 255 - shading * e.data.shadingCoeficient; 
-                        var b = 255 - shading * e.data.shadingCoeficient;
+                        var r = shading * 0.5;
+                        var g = 255 - shading; 
+                        var b = 255 - shading;
                         break;
                     default:
-                        var r = 255 - shading * e.data.shadingCoeficient;
-                        var g = 255 - shading * e.data.shadingCoeficient;
-                        var b = 255 - shading * e.data.shadingCoeficient;
+                        var r = 255 - shading;
+                        var g = 255 - shading;
+                        var b = 255 - shading;
                 }
             }else{
-                var r = 0;
-                var g = 0;
-                var b = 0;
+                var r = 0,g = 0, b = 0;
             }
-
             var offset = (y * e.data.id.width + x) * 4;
             e.data.id.data[offset] = r;
             e.data.id.data[offset + 1] = g;
