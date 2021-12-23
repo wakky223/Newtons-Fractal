@@ -109,6 +109,7 @@ function setScreen(rZero,iZero,e){
     for(let x = 0; x < e.data.id.width; x++){
         for(let y = 0; y < e.data.id.height; y++){
             let iterant = complex(e.data.scale * (x - e.data.h), -e.data.scale * (y - e.data.k));
+            iterant = addComplex(iterant,e.data.offset);
             //iterate newtons method
             let distance = new Array(); 
             for(let i = 0;i < iterations;i++ ){

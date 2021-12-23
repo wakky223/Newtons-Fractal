@@ -17,8 +17,9 @@ function draw(rZero,iZero){
             width: c.width,
             height: c.height,
             id: id,
-            h: c.width/2 - (i *(c.width/numThreads)) + h,
-            k: c.height/2 + k
+            h: c.width/2 - (i *(c.width/numThreads)) + (h * scale),
+            k: c.height/2 + (k * scale),
+            offset: offset
         });
     }
 }
@@ -87,6 +88,15 @@ window.onkeypress = function(event) {
         draw(real,imaginary);
     }
 }   
+//setup mouse click event
+function myFunction(event) {
+    offset = {
+        re: offset.re + (scale * (event.offsetX - (c.width/2))),
+        im: offset.im + (-scale * (event.offsetY - (c.height/2)))
+    }
+    draw(real,imaginary);
+    console.log(offset);
+};
 
 
 //setup canvas element
@@ -102,7 +112,10 @@ var h = 0;
 var k = 0;
 var bar = document.getElementById("innerBar");
 var barWidth = 0;
-
+var offset = {
+    re: 0,
+    im: 0
+}
 var real = [1,-0.5];
 var imaginary = [0,0.8660254037844386467637232];
 init();
