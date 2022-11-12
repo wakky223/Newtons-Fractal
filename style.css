@@ -1,7 +1,8 @@
 body {
     overflow: hidden;  
     padding: 0px;
-    margin: 0px;
+    max-width: 670px;
+    margin: auto 0;
 }
 
 canvas {
@@ -15,6 +16,9 @@ canvas {
 
 #menu {
     padding:5px;
+    max-width: 670px;
+    z-index:1;
+    margin: auto 0;
 }
 
 #bar {
